@@ -18,6 +18,9 @@ def main():
     st.set_page_config(page_title="Document Question Answer Chatbot", page_icon=':books:')
     st.header("Ask anything from your PDF :books:")
 
+    #memory variable
+    memory = []
+
     # upload file
     pdf = st.file_uploader("Upload your PDF", type="pdf", accept_multiple_files=True)
     # extract the text
@@ -54,6 +57,9 @@ def main():
             llm_cohere = Cohere(model="command", cohere_api_key=cohere_api_key)
             chain = load_qa_chain(llm_cohere, chain_type="stuff")
             response = chain.run(input_documents=docs, question=query)
+
+            # Store the question and answer in memory
+            memory.append({"question": query, "answer": response})
            
             st.write(response)
 
@@ -109,6 +115,23 @@ def main():
             response = chain.run(input_documents=docs, question=query)
            
             st.write(response)
+
+     # Memory section
+    if st.checkbox("Memory"):
+        st.write("Memory Selected!")
+
+        # Display the memory
+        if len(memory) > 0:
+            st.write("Previous Questions and Answers:")
+            for i, entry in enumerate(memory, 1):
+                st.write(f"Q{i}: {entry['question']}")
+                st.write(f"A{i}: {entry['answer']}")
+        else:
+            st.write("No previous questions and answers in memory.")
+
+    # Reset memory
+    if st.button("Clear Memory"):
+        memory = []
   
 if __name__ == '__main__':
     main()
