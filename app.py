@@ -41,35 +41,6 @@ def main():
         )
         chunks.extend(text_splitter.split_text(text))
 
-    # if st.checkbox("Cohere Embeddings"):
-    #     st.write("Cohere Embeddings Selected!")
-    #     embeddings_cohere = CohereEmbeddings(model="embed-english-light-v2.0", cohere_api_key=cohere_api_key)
-    #     context = FAISS.from_texts(chunks, embeddings_cohere)
-    #     # rest of the code...
-
-
-
-
-    # extract the text
-    
-    # if pdf is not None:
-    #   pdf_reader = PdfReader(pdf)
-    #   text = ""
-    #   for page in pdf_reader.pages:
-    #     text += page.extract_text()
-      
-    #   #st.write(text)
-      
-    #   # split into chunks
-    #   text_splitter = CharacterTextSplitter(
-    #     separator="\n",
-    #     chunk_size=1000,
-    #     chunk_overlap=200,
-    #     length_function=len
-    #   )
-    #   chunks = text_splitter.split_text(text)
-
-      #st.write(chunks)
     if st.checkbox("Cohere Embeddings"):
         st.write("Cohere Embeddings Selected!")
         embeddings_cohere = CohereEmbeddings(model= "embed-english-light-v2.0",cohere_api_key=cohere_api_key)
