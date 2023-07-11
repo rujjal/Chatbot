@@ -17,9 +17,9 @@ def main():
 
     #cohere api key
     cohere_api_key = "DmNJjqWQ4TIkFaWyC6kS3fc9HEDEjpnkAA2G9c8l"
-    model_id = "damo/nlp_corom_sentence-embedding_english-base"
-    st.set_page_config(page_title="Document Question Answer Chatbot", page_icon=':computer:')
-    st.header("Document Question Answer Chatbot :computer:")
+   # model_id = "damo/nlp_corom_sentence-embedding_english-base"
+    st.set_page_config(page_title="CHATBOT for legal queries related to divorce and inheritance ", page_icon=':books:')
+    st.header("CHATBOT for legal queries related to divorce and inheritance :books:")
 
     #memory variable
     memory = []
@@ -54,7 +54,7 @@ def main():
         context = FAISS.from_texts(chunks, embeddings_cohere)
 
             # show user input
-        query = st.text_input("Ask a question about your PDF:")
+        query = st.text_input("Ask a question about your documents:")
         if query:
             docs = context.similarity_search(query)
             #used cohere llm to answer the queries
@@ -74,7 +74,7 @@ def main():
         context = FAISS.from_texts(chunks, embeddings_model_scope)
 
             # show user input
-        query = st.text_input("Ask a question about your PDF:")
+        query = st.text_input("Ask a question about your documents:")
         if query:
             docs = context.similarity_search(query)
 
@@ -92,7 +92,7 @@ def main():
         context = FAISS.from_texts(chunks, embeddings_st)
 
             # show user input
-        query = st.text_input("Ask a question about your PDF:")
+        query = st.text_input("Ask a question about your documents:")
         if query:
             docs = context.similarity_search(query)
 
@@ -110,7 +110,7 @@ def main():
         context = FAISS.from_texts(chunks, embeddings_st)
 
             # show user input
-        query = st.text_input("Ask a question about your PDF:")
+        query = st.text_input("Ask a question about your documents:")
         if query:
             docs = context.similarity_search(query)
 
