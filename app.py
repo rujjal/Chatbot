@@ -1,3 +1,4 @@
+#import the necessary libraries
 import streamlit as st
 from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
@@ -13,16 +14,18 @@ from sentence_transformers import SentenceTransformer
 #cohere_api_key= "rCTqOlfaNwEuTCO8ALXYryaAoBDmH8Yky6LncQnO"
 
 def main():
-    cohere_api_key= "rCTqOlfaNwEuTCO8ALXYryaAoBDmH8Yky6LncQnO"
+
+    #cohere api key
+    cohere_api_key = "DmNJjqWQ4TIkFaWyC6kS3fc9HEDEjpnkAA2G9c8l"
     model_id = "damo/nlp_corom_sentence-embedding_english-base"
-    st.set_page_config(page_title="Document Question Answer Chatbot", page_icon=':books:')
-    st.header("Ask anything from your PDF :books:")
+    st.set_page_config(page_title="Document Question Answer Chatbot", page_icon=':computer:')
+    st.header("Document Question Answer Chatbot :computer:")
 
     #memory variable
     memory = []
 
     # upload file
-    pdf = st.file_uploader("Upload your PDF", type="pdf", accept_multiple_files=True)
+    pdf = st.file_uploader("Upload your documents", type="pdf", accept_multiple_files=True)
     # extract the text
     texts = []
     if pdf is not None:
@@ -44,6 +47,7 @@ def main():
         )
         chunks.extend(text_splitter.split_text(text))
 
+#using the cohere embedding model(open source)
     if st.checkbox("Cohere Embeddings"):
         st.write("Cohere Embeddings Selected!")
         embeddings_cohere = CohereEmbeddings(model= "embed-english-light-v2.0",cohere_api_key=cohere_api_key)
@@ -53,7 +57,7 @@ def main():
         query = st.text_input("Ask a question about your PDF:")
         if query:
             docs = context.similarity_search(query)
-
+            #used cohere llm to answer the queries
             llm_cohere = Cohere(model="command", cohere_api_key=cohere_api_key)
             chain = load_qa_chain(llm_cohere, chain_type="stuff")
             response = chain.run(input_documents=docs, question=query)
@@ -62,7 +66,7 @@ def main():
             memory.append({"question": query, "answer": response})
            
             st.write(response)
-
+#using model scope embeddings model
     elif st.checkbox("Model Scope Embeddings"):
         model_id = "damo/nlp_corom_sentence-embedding_english-base"
         st.write("Model Scope Embeddings Selected!")
@@ -79,7 +83,7 @@ def main():
             response = chain.run(input_documents=docs, question=query)
            
             st.write(response)
-
+#using sentence transformers embeddings
     elif st.checkbox("Sentence Transformers Embeddings"):
         st.write("Sentence Transformer Embeddings Selected!")
         model_name = "sentence-transformers/all-mpnet-base-v2"
@@ -97,7 +101,7 @@ def main():
             response = chain.run(input_documents=docs, question=query)
            
             st.write(response)
-
+#using JINA Ai embedding model
     elif st.checkbox("JINA Ai Embeddings"):
         st.write("JINA Ai Embeddings Selected!")
         model_name = "sentence-transformers/all-mpnet-base-v2"
