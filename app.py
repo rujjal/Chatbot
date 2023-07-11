@@ -11,7 +11,6 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer
 
 
-#cohere_api_key= "rCTqOlfaNwEuTCO8ALXYryaAoBDmH8Yky6LncQnO"
 
 def main():
 
@@ -40,7 +39,7 @@ def main():
     chunks = []
     for text in texts:
         text_splitter = CharacterTextSplitter(
-            separator="\n",
+            separator="\n\n",
             chunk_size=1000,
             chunk_overlap=200,
             length_function=len
