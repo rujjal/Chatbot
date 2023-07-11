@@ -15,7 +15,7 @@ from sentence_transformers import SentenceTransformer
 def main():
 
     #cohere api key
-    cohere_api_key = "DmNJjqWQ4TIkFaWyC6kS3fc9HEDEjpnkAA2G9c8l"
+    cohere_api_key = "YOUR API KEY"
    # model_id = "damo/nlp_corom_sentence-embedding_english-base"
     st.set_page_config(page_title="CHATBOT for legal queries related to divorce and inheritance ", page_icon=':books:')
     st.header("CHATBOT for legal queries related to divorce and inheritance :books:")
