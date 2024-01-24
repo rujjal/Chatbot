@@ -10,10 +10,10 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer
 
 
-#cohere_api_key= "rCTqOlfaNwEuTCO8ALXYryaAoBDmH8Yky6LncQnO"
+
 
 def main():
-    cohere_api_key= "rCTqOlfaNwEuTCO8ALXYryaAoBDmH8Yky6LncQnO"
+    cohere_api_key= "YOUR API KEY"
     model_id = "damo/nlp_corom_sentence-embedding_english-base"
     st.set_page_config(page_title="Document Question Answer Chatbot", page_icon=':books:')
     st.header("Ask anything from your PDF :books:")
